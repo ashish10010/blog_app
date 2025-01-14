@@ -11,14 +11,12 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
-  final TextEditingController nameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final formKey = GlobalKey<FormState>();
 
   @override
   void dispose() {
-    nameController.dispose();
     emailController.dispose();
     passwordController.dispose();
     super.dispose();
@@ -35,7 +33,7 @@ class _SignUpPageState extends State<SignUpPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                "Sign Up.",
+                "Sign In.",
                 style: TextStyle(
                   fontSize: 50,
                   fontWeight: FontWeight.bold,
@@ -45,16 +43,13 @@ class _SignUpPageState extends State<SignUpPage> {
                 height: 30,
               ),
               AuthField(
-                hintText: 'Name',
-                controller: nameController,
+                hintText: 'Email',
+                controller: emailController,
               ),
               const SizedBox(
                 height: 15,
               ),
-              AuthField(
-                hintText: "Email",
-                controller: emailController,
-              ),
+           
               const SizedBox(
                 height: 15,
               ),
@@ -72,11 +67,11 @@ class _SignUpPageState extends State<SignUpPage> {
               ),
               RichText(
                 text: TextSpan(
-                    text: "Already Have an account. ",
+                    text: "Don't Have an account. ",
                     style: Theme.of(context).textTheme.titleMedium,
                     children: [
                       TextSpan(
-                        text: "Sign In",
+                        text: "Sign Up.",
                         style:
                             Theme.of(context).textTheme.titleMedium?.copyWith(
                                   color: AppPallete.gradient2,
