@@ -1,16 +1,21 @@
 import 'package:blog_app/core/theme/app_pallete.dart';
+import 'package:blog_app/features/auth/presentation/pages/sign_up_page.dart';
 import 'package:blog_app/features/auth/presentation/widgets/auth_field.dart';
 import 'package:blog_app/features/auth/presentation/widgets/auth_gradient_button.dart';
 import 'package:flutter/material.dart';
 
-class SignUpPage extends StatefulWidget {
-  const SignUpPage({super.key});
+class SignInPage extends StatefulWidget {
+   static route() => MaterialPageRoute(
+        builder: (context) => SignInPage(),
+      );
+
+  const SignInPage({super.key});
 
   @override
-  State<SignUpPage> createState() => _SignUpPageState();
+  State<SignInPage> createState() => _SignInPageState();
 }
 
-class _SignUpPageState extends State<SignUpPage> {
+class _SignInPageState extends State<SignInPage> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final formKey = GlobalKey<FormState>();
@@ -49,7 +54,6 @@ class _SignUpPageState extends State<SignUpPage> {
               const SizedBox(
                 height: 15,
               ),
-           
               const SizedBox(
                 height: 15,
               ),
@@ -61,24 +65,31 @@ class _SignUpPageState extends State<SignUpPage> {
               const SizedBox(
                 height: 15,
               ),
-              AuthGradientButton(),
+              AuthGradientButton(
+                text: "Sign In.",
+              ),
               const SizedBox(
                 height: 30,
               ),
-              RichText(
-                text: TextSpan(
-                    text: "Don't Have an account. ",
-                    style: Theme.of(context).textTheme.titleMedium,
-                    children: [
-                      TextSpan(
-                        text: "Sign Up.",
-                        style:
-                            Theme.of(context).textTheme.titleMedium?.copyWith(
-                                  color: AppPallete.gradient2,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                      ),
-                    ]),
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(context, SignUpPage.route());
+                },
+                child: RichText(
+                  text: TextSpan(
+                      text: "Don't Have an account. ",
+                      style: Theme.of(context).textTheme.titleMedium,
+                      children: [
+                        TextSpan(
+                          text: "Sign Up.",
+                          style:
+                              Theme.of(context).textTheme.titleMedium?.copyWith(
+                                    color: AppPallete.gradient2,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                        ),
+                      ]),
+                ),
               ),
             ],
           ),

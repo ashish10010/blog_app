@@ -1,9 +1,13 @@
 import 'package:blog_app/core/theme/app_pallete.dart';
+import 'package:blog_app/features/auth/presentation/pages/sign_in_page.dart';
 import 'package:blog_app/features/auth/presentation/widgets/auth_field.dart';
 import 'package:blog_app/features/auth/presentation/widgets/auth_gradient_button.dart';
 import 'package:flutter/material.dart';
 
 class SignUpPage extends StatefulWidget {
+    static route() => MaterialPageRoute(
+        builder: (context) => SignUpPage(),
+      );
   const SignUpPage({super.key});
 
   @override
@@ -27,6 +31,7 @@ class _SignUpPageState extends State<SignUpPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Form(
@@ -66,24 +71,29 @@ class _SignUpPageState extends State<SignUpPage> {
               const SizedBox(
                 height: 15,
               ),
-              AuthGradientButton(),
+              AuthGradientButton(text: "Sign Up.",),
               const SizedBox(
                 height: 30,
               ),
-              RichText(
-                text: TextSpan(
-                    text: "Already Have an account. ",
-                    style: Theme.of(context).textTheme.titleMedium,
-                    children: [
-                      TextSpan(
-                        text: "Sign In",
-                        style:
-                            Theme.of(context).textTheme.titleMedium?.copyWith(
-                                  color: AppPallete.gradient2,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                      ),
-                    ]),
+              GestureDetector(
+                 onTap: () {
+                  Navigator.push(context, SignInPage.route());
+                },
+                child: RichText(
+                  text: TextSpan(
+                      text: "Already Have an account. ",
+                      style: Theme.of(context).textTheme.titleMedium,
+                      children: [
+                        TextSpan(
+                          text: "Sign In",
+                          style:
+                              Theme.of(context).textTheme.titleMedium?.copyWith(
+                                    color: AppPallete.gradient2,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                        ),
+                      ]),
+                ),
               ),
             ],
           ),
