@@ -1,6 +1,6 @@
 # blog_app
 
-A new Flutter project.
+Blog application in flutter,bloc,supabase,hive using clean architecture.
 
 ## Application Flow 
 ![alt text](blog_app_flowchart.drawio.png)
