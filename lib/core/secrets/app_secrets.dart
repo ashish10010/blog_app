@@ -1,5 +1,4 @@
 class AppSecrets {
-  static const supabaseUrl = "https://hxmqhmojkltnkvdvsmui.supabase.co";
-  static const supabaseAnonKey =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imh4bXFobW9qa2x0bmt2ZHZzbXVpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzY5Mzg3MTcsImV4cCI6MjA1MjUxNDcxN30.l2CCvNvzdnPoCD7jzY2R4fgbLklz6MkoLC1Uoh3CjM4";
+  static const supabaseUrl = "https://goxpcbivxxecwxubzcbf.supabase.co";
+  static const supabaseAnonKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdveHBjYml2eHhlY3d4dWJ6Y2JmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzcwMTU4NDUsImV4cCI6MjA1MjU5MTg0NX0.EJ0TRnUcIGpj6s1cSW1XmH0oSL0__nxQBMUHWNQfQb4";
 }
