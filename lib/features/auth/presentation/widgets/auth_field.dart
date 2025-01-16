@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 class AuthField extends StatelessWidget {
   final String hintText;
   final TextEditingController controller;
-  bool isObscureText;
+  final bool isObscureText;
 
-  AuthField({
+  const AuthField({
     super.key,
     required this.controller,
     required this.hintText,
