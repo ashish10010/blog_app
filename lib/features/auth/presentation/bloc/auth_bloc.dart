@@ -1,4 +1,5 @@
 import 'package:blog_app/features/auth/domain/entities/users.dart';
+import 'package:blog_app/features/auth/domain/usecases/user_login.dart';
 import 'package:blog_app/features/auth/domain/usecases/user_sign_up.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -7,27 +8,43 @@ part 'auth_state.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final UserSignUp _userSignUp;
-  AuthBloc({
-    required UserSignUp userSignUp,
-  })  : _userSignUp = userSignUp,
+  final UserLogin _userLogin;
+
+  AuthBloc({required UserSignUp userSignUp, required UserLogin userLogin})
+      : _userSignUp = userSignUp,
+        _userLogin = userLogin,
         super(AuthInitial()) {
-    on<AuthSignUp>(
-      (event, emit) async {
-        emit(AuthLoading());
-        final res = await _userSignUp(
-          UserSignUpParams(
-            email: event.email,
-            name: event.name,
-            password: event.password,
-          ),
-        );
-        res.fold(
-          (failure) => emit(AuthFailure(failure.message)),
-          (user) => emit(
-            AuthSucess(user),
-          ),
-        );
-      },
+    on<AuthSignUp>(_onAuthSignUp);
+    on<AuthLogin>(_onAuthLogin);
+  }
+
+  void _onAuthSignUp(
+    AuthSignUp event,
+    Emitter<AuthState> emit,
+  ) async {
+    final res = await _userSignUp(
+      UserSignUpParams(
+        email: event.email,
+        password: event.password,
+        name: event.name,
+      ),
     );
+
+    res.fold(
+      (failure) => emit(AuthFailure(failure.message)),
+      (user) => emit(AuthSucess(user)),
+    );
+  }
+
+  void _onAuthLogin(AuthLogin event, Emitter<AuthState> emit) async {
+    emit(AuthLoading());
+
+    final res = await _userLogin(
+      UserLoginParams(
+        email: event.email,
+        password: event.password,
+      ),
+    );
+    res.fold((l) => emit(AuthFailure(l.message)), (r) => emit(AuthSucess(r)));
   }
 }
