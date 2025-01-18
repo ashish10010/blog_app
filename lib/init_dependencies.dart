@@ -11,45 +11,44 @@ import 'core/secrets/app_secrets.dart';
 final serviceLocator = GetIt.instance;
 
 Future<void> initDependencies() async {
-   _initAuth();
+  _initAuth();
   final supabase = await Supabase.initialize(
     url: AppSecrets.supabaseUrl,
     anonKey: AppSecrets.supabaseAnonKey,
   );
   serviceLocator.registerLazySingleton(() => supabase.client);
- 
 }
 
 void _initAuth() {
   //datasource
-  serviceLocator.registerFactory<AuthRemoteDataSource>(
-    () => AuthRemoteDataSourceImpl(
-      serviceLocator<SupabaseClient>(),
-    ),
-  );
-  //repository
-  serviceLocator.registerFactory<AuthRepository>(
-    () => AuthRepositoryImpl(
-      serviceLocator<AuthRemoteDataSource>(),
-    ),
-  );
-  //usecases
-  serviceLocator.registerFactory(
-    () => UserSignUp(
-      serviceLocator<AuthRepository>(),
-    ),
-  );
-  serviceLocator.registerFactory(
-    () => UserLogin(
-      serviceLocator<AuthRepository>(),
-    ),
-  );
-  serviceLocator.registerLazySingleton(
-    () => AuthBloc(
-      userSignUp: serviceLocator<UserSignUp>(),
-      userLogin: serviceLocator<UserLogin>(),
-    ),
-  );
-
-  
+  serviceLocator
+    ..registerFactory<AuthRemoteDataSource>(
+      () => AuthRemoteDataSourceImpl(
+        serviceLocator<SupabaseClient>(),
+      ),
+    )
+    //authrepository
+    ..registerFactory<AuthRepository>(
+      () => AuthRepositoryImpl(
+        serviceLocator<AuthRemoteDataSource>(),
+      ),
+    )
+    //usecases
+    ..registerFactory(
+      () => UserSignUp(
+        serviceLocator<AuthRepository>(),
+      ),
+    )
+    ..registerFactory(
+      () => UserLogin(
+        serviceLocator<AuthRepository>(),
+      ),
+    )
+    //authbloc
+    ..registerLazySingleton(
+      () => AuthBloc(
+        userSignUp: serviceLocator<UserSignUp>(),
+        userLogin: serviceLocator<UserLogin>(),
+      ),
+    );
 }
