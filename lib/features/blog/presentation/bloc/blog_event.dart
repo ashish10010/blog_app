@@ -18,3 +18,5 @@ final class BlogUploadE extends BlogEvent {
     required this.image,
   });
 }
+
+final class BlogFetchAllBlogs extends BlogEvent {}

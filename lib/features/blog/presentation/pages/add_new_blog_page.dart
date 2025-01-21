@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:blog_app/core/common/cubits/app_user/app_user_cubit.dart';
+import 'package:blog_app/core/common/widgets/loader.dart';
 import 'package:blog_app/core/theme/app_pallete.dart';
 import 'package:blog_app/core/utils/pick_image.dart';
 import 'package:blog_app/core/utils/show_snakbar.dart';
@@ -74,7 +75,7 @@ class _AddNewBlogPageState extends State<AddNewBlogPage> {
         listener: (context, state) {
           if (state is BlogFailure) {
             showSnackBar(context, state.error);
-          } else if (state is BlogSucess) {
+          } else if (state is BlogUploadSucess) {
             Navigator.pushAndRemoveUntil(
               context,
               BlogPage.route(),
@@ -83,6 +84,10 @@ class _AddNewBlogPageState extends State<AddNewBlogPage> {
           }
         },
         builder: (context, state) {
+          if (state is BlogLoading)
+          {
+            return const Loader();
+          }
           return SingleChildScrollView(
             child: Padding(
               padding: const EdgeInsets.all(16.0),
